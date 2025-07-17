@@ -40,8 +40,15 @@ class KafkaPushListener(StreamListener):
         return True
 
 
-# Twitter Stream Config
-twitter_stream = Stream(auth, KafkaPushListener())
+def main():
+    """Start a Twitter stream and forward incoming tweets to Kafka."""
 
-# Produce Data that has trump hashtag (Tweets)
-twitter_stream.filter(track=['#coronavirus'])
+    # Twitter Stream Config
+    twitter_stream = Stream(auth, KafkaPushListener())
+
+    # Produce data that has a coronavirus hashtag
+    twitter_stream.filter(track=['#coronavirus'])
+
+
+if __name__ == "__main__":
+    main()
